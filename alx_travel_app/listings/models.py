@@ -33,4 +33,15 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.user.username} on {self.listing.title}"
+
+class Payment(models.Model):
+    booking_reference = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    status = models.CharField(max_length=20, choices=[
+        ('Pending', 'Pending'),
+        ('Completed', 'Completed'),
+        ('Failed', 'Failed')
+    ], default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
 # Create your models here.
